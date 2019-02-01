@@ -17,7 +17,9 @@ public class Separation {
     private String createdUser;
 
     public Separation(SeparationBuilder builder) {
-
+        country=builder.country;
+        separatedRegionName=builder.separatedRegionName;
+        createdUser=builder.createdUser;
     }
 
     private Separation(){}
