@@ -20,6 +20,18 @@ public class SeparationController {
         return separationFilterRepository.getFilteredSeparationsForUser(userId, filter.getFilter());
     }
 
+    @GetMapping(path = "/separations")
+    public @ResponseBody List<SeparationDto> getSeparations() {
+        return repository.findAll().stream()
+                .map(this::mapSeparationToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/separation/{id}")
+    public @ResponseBody SeparationDto getSeparationById(@PathVariable(name = "id") Integer id) {
+        return repository.findById(id).map(this::mapSeparationToDto).orElseThrow(IllegalArgumentException::new);
+    }
+
     @PostMapping(path = "/separation")
     public @ResponseBody SeparationDto createSeparation(@RequestBody SeparationDto separationDto) {
         return mapSeparationToDto(repository.save(mapDtoToSeparation(separationDto)));
@@ -29,6 +41,7 @@ public class SeparationController {
         return new SeparationDto()
                 .withId(separation.getId())
                 .withCreatedUser(separation.getCreatedUser())
+                .withArgumentation(separation.getArgumentation())
                 .withCountry(separation.getCountry())
                 .withSeparatedRegionName(separation.getSeparatedRegionName());
     }
