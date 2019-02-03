@@ -15,11 +15,14 @@ public class Separation {
     private String separatedRegionName;
     @Column(name = "CREATED_USER")
     private String createdUser;
+    @Column(name = "ARGUMENTATION")
+    private String argumentation;
 
     public Separation(SeparationBuilder builder) {
         country=builder.country;
         separatedRegionName=builder.separatedRegionName;
         createdUser=builder.createdUser;
+        argumentation=builder.argumentation;
     }
 
     private Separation(){}
@@ -40,11 +43,16 @@ public class Separation {
         return createdUser;
     }
 
+    public String getArgumentation() {
+        return argumentation;
+    }
+
     public static class SeparationBuilder {
 
         private String country;
         private String separatedRegionName;
         private String createdUser;
+        private String argumentation;
 
         private SeparationBuilder(){}
 
@@ -64,6 +72,11 @@ public class Separation {
 
         public SeparationBuilder withCreatedUser(String createdUser) {
             this.createdUser = createdUser;
+            return this;
+        }
+
+        public SeparationBuilder withArgumentation(String argumentation) {
+            this.argumentation = argumentation;
             return this;
         }
 

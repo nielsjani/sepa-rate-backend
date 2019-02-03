@@ -11,13 +11,13 @@ public class SeparationController {
 
     @Autowired
     private SeparationRepository repository;
+    @Autowired
+    private SeparationFilterRepository separationFilterRepository;
 
 
-    @GetMapping(path = "/separations/{userId}")
-    public @ResponseBody List<SeparationDto> getSeparationsForUser(@PathVariable(name = "userId") String userId) {
-        return repository.findByCreatedUser(userId).stream()
-                .map(this::mapSeparationToDto)
-                .collect(Collectors.toList());
+    @PostMapping(path = "/separations/{userId}")
+    public @ResponseBody List<SeparationDto> getSeparationsForUser(@PathVariable(name = "userId") String userId, @RequestBody FilterDto filter) {
+        return separationFilterRepository.getFilteredSeparationsForUser(userId, filter.getFilter());
     }
 
     @PostMapping(path = "/separation")

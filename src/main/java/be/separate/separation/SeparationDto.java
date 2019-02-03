@@ -8,6 +8,7 @@ public class SeparationDto implements Serializable {
     private String country;
     private String separatedRegionName;
     private String createdUser;
+    private String argumentation;
 
     public int getId() {
         return id;
@@ -42,6 +43,15 @@ public class SeparationDto implements Serializable {
 
     public SeparationDto withCreatedUser(String createdUser) {
         this.createdUser = createdUser;
+        return this;
+    }
+
+    public String getArgumentation() {
+        return argumentation;
+    }
+
+    public SeparationDto withArgumentation(String argumentation) {
+        this.argumentation = argumentation;
         return this;
     }
 }
