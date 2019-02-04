@@ -1,5 +1,6 @@
 package be.separate.separation;
 
+import org.owasp.html.HtmlPolicyBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,8 @@ public class SeparationController {
 
     @PostMapping(path = "/separation")
     public @ResponseBody SeparationDto createSeparation(@RequestBody SeparationDto separationDto) {
+        //Html sanitizer (OWASP)
+        //https://github.com/OWASP/java-html-sanitizer/blob/master/src/main/java/org/owasp/html/examples/EbayPolicyExample.java
         return mapSeparationToDto(repository.save(mapDtoToSeparation(separationDto)));
     }
 

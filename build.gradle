@@ -43,4 +43,5 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
+    compile('com.googlecode.owasp-java-html-sanitizer:owasp-java-html-sanitizer:20180219.1')
 }
