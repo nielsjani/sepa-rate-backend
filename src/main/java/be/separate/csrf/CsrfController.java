@@ -11,6 +11,7 @@ public class CsrfController {
 
     @GetMapping(path = "/get/attack")
     public @ResponseBody void createUser(HttpServletRequest request) {
+        //request.getHeader("AUTH_DATA");
         request.getCookies();
     }
 
