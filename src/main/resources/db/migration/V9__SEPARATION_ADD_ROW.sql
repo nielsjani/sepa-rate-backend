@@ -1,0 +1,2 @@
+INSERT INTO SEPA_RATE.separation values (default, 'Belgium', 'Limburg', 'NOTHER_BELGIAN', 'Cuz Limburg rules');
+INSERT INTO SEPA_RATE.separation values (default, 'Belgium', 'Everything but Limburg', 'NOTHER_BELGIAN_2', 'Dont listen to that guy!');

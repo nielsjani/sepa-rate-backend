@@ -1,5 +1,7 @@
 package be.separate.separation;
 
+import be.separate.user.User;
+import be.separate.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +14,21 @@ public class SeparationController {
     @Autowired
     private SeparationRepository repository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private SeparationFilterRepository separationFilterRepository;
 
 
     @PostMapping(path = "/separations/{userId}")
     public @ResponseBody List<SeparationDto> getSeparationsForUser(@PathVariable(name = "userId") String userId, @RequestBody FilterDto filter) {
         return separationFilterRepository.getFilteredSeparationsForUser(userId, filter.getFilter());
+    }
+
+    @GetMapping(path = "/separations/{userId}")
+    public @ResponseBody List<SeparationDto> getSeparationsRateableForUser(@PathVariable(name = "userId") String userId) {
+        return repository.findByCountry(userRepository.findByUsername(userId).getCountry()).stream()
+                .map(this::mapSeparationToDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/separations")

@@ -11,4 +11,5 @@ import java.util.List;
 public interface SeparationRepository extends JpaRepository<Separation, Integer> {
 
     List<Separation> findByCreatedUser(String userId);
+    List<Separation> findByCountry(String country);
 }
