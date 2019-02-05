@@ -28,8 +28,8 @@ public class SeparationController {
     }
 
     @GetMapping(path = "/separation/{id}")
-    public @ResponseBody SeparationDto getSeparationById(@PathVariable(name = "id") Integer id) {
-        return repository.findById(id).map(this::mapSeparationToDto).orElseThrow(IllegalArgumentException::new);
+    public @ResponseBody SeparationDto getSeparationById(@PathVariable(name = "id") String id) {
+        return repository.findByIdAndCreatedUser(id, "WART_DE_BEVER").map(this::mapSeparationToDto).orElseThrow(IllegalArgumentException::new);
     }
 
     @PostMapping(path = "/separation")

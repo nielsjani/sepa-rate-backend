@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class SeparationDto implements Serializable {
 
-    private int id;
+    private String id;
     private String country;
     private String separatedRegionName;
     private String createdUser;
     private String argumentation;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public SeparationDto withId(int id) {
+    public SeparationDto withId(String id) {
         this.id = id;
         return this;
     }

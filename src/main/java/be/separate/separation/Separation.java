@@ -1,14 +1,14 @@
 package be.separate.separation;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "SEPARATION", schema = "SEPA_RATE")
 public class Separation {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private String id;
     @Column(name = "COUNTRY")
     private String country;
     @Column(name = "REGION_NAME")
@@ -19,6 +19,7 @@ public class Separation {
     private String argumentation;
 
     public Separation(SeparationBuilder builder) {
+        id = UUID.randomUUID().toString();
         country=builder.country;
         separatedRegionName=builder.separatedRegionName;
         createdUser=builder.createdUser;
@@ -27,7 +28,7 @@ public class Separation {
 
     private Separation(){}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

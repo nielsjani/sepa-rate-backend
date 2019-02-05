@@ -24,7 +24,7 @@ public class SeparationFilterRepository {
         List<Map<String, Object>> results = jdbcTemplate.queryForList(queryString);
         return results.stream()
                 .map(result -> new SeparationDto()
-                        .withId((Integer) result.get("id"))
+                        .withId((String) result.get("id"))
                         .withCountry((String) result.get("country"))
                         .withSeparatedRegionName((String) result.get("separatedRegionName"))
                         .withCreatedUser((String) result.get("createdUser"))
