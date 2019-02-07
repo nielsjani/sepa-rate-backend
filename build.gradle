@@ -34,7 +34,7 @@ dependencies {
     compile('org.apache.commons:commons-lang3:3.7')
     compile('com.google.guava:guava:26.0-jre')
 
-//    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
     compile("org.springframework.boot:spring-boot-starter-web")
 
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -42,5 +42,6 @@ dependencies {
     compile "org.flywaydb:flyway-core:5.2.4"
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.keycloak:keycloak-spring-boot-2-starter:4.0.0.Final')
 
 }

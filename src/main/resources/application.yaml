@@ -7,3 +7,12 @@ spring:
     hibernate:
       ddl-auto: none
 #    driver-class-name: oracle.jdbc.OracleDriver
+
+
+keycloak:
+  realm: "master"
+  auth-server-url: http://localhost:8880/auth
+  ssl-required: external
+  resource: SpringBootClient
+  public-client: true
+  confidential-port: 0
