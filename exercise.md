@@ -13,34 +13,39 @@
 - Add Keycloak dependency: _compile('org.keycloak:keycloak-spring-boot-2-starter:4.0.0.Final')_
 - Add a Spring security config that integrates with Keycloak. A good start can be found (here)[https://www.baeldung.com/spring-boot-keycloak]
     - To connect with the UI, the configure method will need to changed slightly to:
-        -	@Override
+        ```java
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
             super.configure(http);
             http.cors()
                     .and().authorizeRequests()
                     .and().csrf().disable();
         }
+     ```
      - We also need to add a corsConfiguration. eg:
-        -     @Bean
-              CorsConfigurationSource corsConfigurationSource() {
-                  final CorsConfiguration configuration = new CorsConfiguration();
-                  configuration.setAllowedOrigins(Collections.singletonList("*"));
-                  configuration.setAllowedMethods(asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
-                  configuration.setAllowCredentials(true);
-                  configuration.setAllowedHeaders(asList("Authorization", "Cache-Control", "Content-Type"));
-                  final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-                  source.registerCorsConfiguration("/**", configuration);
-                  return source;
-              }
+        ```java
+        @Bean
+        CorsConfigurationSource corsConfigurationSource() {
+          final CorsConfiguration configuration = new CorsConfiguration();
+          configuration.setAllowedOrigins(Collections.singletonList("*"));
+          configuration.setAllowedMethods(asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+          configuration.setAllowCredentials(true);
+          configuration.setAllowedHeaders(asList("Authorization", "Cache-Control", "Content-Type"));
+          final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+          source.registerCorsConfiguration("/**", configuration);
+          return source;
+        }
+       ```
 - Add some keycloak related properties in the yaml file:
-    - keycloak:
+    ```yaml
+    keycloak:
         realm: "master"
         auth-server-url: http://localhost:yourport/auth
         ssl-required: external
         resource: SpringBootClient
         public-client: true
-        confidential-port: 0	
-        
+        confidential-port: 0
+    ```    
 - Remove the userRepository, User and UserDto. These will no longer be used
 - Instead of fetching the users via a db call, we'll have to perform a rest call to Keycloak to log in.
     - This is a POST to <keycloak-url>/auth/realms/master/protocol/openid-connect/token
