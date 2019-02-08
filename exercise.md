@@ -44,6 +44,7 @@
 - Remove the userRepository, User and UserDto. These will no longer be used
 - Instead of fetching the users via a db call, we'll have to perform a rest call to Keycloak to log in.
     - This is a POST to <keycloak-url>/auth/realms/master/protocol/openid-connect/token
+    - Add a header: 'Content-Type' : 'application/x-www-form-urlencoded'
     - The body of the request is a map containing the following parameters:
         - grant_type=password
         -  client_id=Application's client id
