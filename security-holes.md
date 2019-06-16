@@ -61,3 +61,25 @@ You will see that both the cookie and the _request.getHeader("AUTH_DATA")_ retur
 
 Now open the 'Rate' page in the regular UI. This page will also call the CsrfController. 
 Here, the cookie will also be empty. The AUTH_DATA header will be filled in correctly.
+
+### Insecure direct object reference
+
+#### Why
+Separations table uses an auto-generated, incrementing primary key. 
+This makes it very easy to guess the ID's of all separations by changing the url of the separation detail page
+
+#### How to solve
+Change the auto-incremented id to a UUID. This makes it very hard to guess an existing ID.
+
+Also add some extra checks in the backend to see if a given user has the right to access the details of a separation.
+This is achieved by changing the repository call 'FindById' to 'FindByIdAndCreatedUser' in the SeparationController's _GetSeparationById_ method.
+
+### Broken access control
+
+#### Why
+The list on the 'Sepa' page performs a backend call that returns all items from the DB. 
+Filtering on which items should or should not be shown is done in the UI.
+A tech-savvy user could log in, perform the REST call (or inspect network traffic) and see all items.
+
+#### How to solve
+In the backend, construct the query in such a way that it only returns the items for the user that requests them.
